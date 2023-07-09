@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using WpfPlayground.Wpf.Attach;
@@ -9,7 +8,7 @@ using WpfPlayground.Wpf.Extensions;
 
 namespace WpfPlayground.Wpf.Converter
 {
-    public class TreeViewItemContextMenuConverter : IValueConverter
+    public class ContextMenuConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,6 +18,14 @@ namespace WpfPlayground.Wpf.Converter
                 if (treeView.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos)
                 {
                     return CheckMenuInfos(itemInfos, treeViewItem.DataContext);
+                }
+            }
+            else if (value is DataGridRow dataGridRow)
+            {
+                var dataGrid = dataGridRow.FindAncestor<DataGrid>();
+                if (dataGrid.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos)
+                {
+                    return CheckMenuInfos(itemInfos, dataGridRow.DataContext);
                 }
             }
 

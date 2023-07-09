@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace WpfPlayground.Views
+﻿namespace WpfPlayground.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

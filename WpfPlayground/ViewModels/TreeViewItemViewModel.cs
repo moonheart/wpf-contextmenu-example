@@ -29,11 +29,13 @@ namespace WpfPlayground.ViewModels
             {
                 SetProperty(ref _isExpanded, value);
                 
+                // 如果当前节点展开，那么父节点也要展开
                 if (_isExpanded && _parent != null)
                 {
                     _parent.IsExpanded = true;
                 }
                 
+                // 懒加载：如果当前节点是初始状态，那么加载子节点
                 if (Children.Count == 1 && Children[0] == DummyChild)
                 {
                     Children.Clear();
@@ -53,6 +55,9 @@ namespace WpfPlayground.ViewModels
             get => _parent;
         }
         
+        /// <summary>
+        /// 派生类重写此方法，可以在启用懒加载的时候动态加载子节点
+        /// </summary>
         protected virtual void LoadChildren()
         {
             

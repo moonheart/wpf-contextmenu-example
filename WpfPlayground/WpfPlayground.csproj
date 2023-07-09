@@ -63,7 +63,7 @@
         </Compile>
         <Compile Include="Wpf\Attach\CommandEx.cs" />
         <Compile Include="Wpf\Converter\DebugConverter.cs" />
-        <Compile Include="Wpf\Converter\TreeViewItemContextMenuConverter.cs" />
+        <Compile Include="Wpf\Converter\ContextMenuConverter.cs" />
         <Compile Include="Wpf\Extensions\FrameworkElementExtensions.cs" />
         <Compile Include="Wpf\MenuItemInfo.cs" />
     </ItemGroup>

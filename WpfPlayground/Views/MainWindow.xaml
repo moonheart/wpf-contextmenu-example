@@ -9,17 +9,26 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Border>
-            <TreeView
-                ItemsSource="{Binding DataItems}"
-                attach:CommandEx.ItemsSource="{Binding ContextMenuInfos}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </Border>
-    </Grid>
+    <TabControl>
+        <TabItem Header="TreeView">
+            <Border>
+                <TreeView
+                    ItemsSource="{Binding TreeNodes}"
+                    attach:CommandEx.ItemsSource="{Binding ContextMenuInfos}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Border>
+        </TabItem>
+        <TabItem Header="DataGrid">
+            <DataGrid 
+                IsReadOnly="True"
+                ItemsSource="{Binding DataGridItems}"
+                attach:CommandEx.ItemsSource="{Binding ContextMenuInfos}"
+                ></DataGrid>
+        </TabItem>
+    </TabControl>
 </Window>
