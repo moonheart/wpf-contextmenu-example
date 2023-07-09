@@ -12,24 +12,15 @@ namespace WpfPlayground.Wpf.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is TreeViewItem treeViewItem)
+            switch (value)
             {
-                var treeView = treeViewItem.FindAncestor<TreeView>();
-                if (treeView.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos)
-                {
+                case TreeViewItem treeViewItem when treeViewItem.FindAncestor<TreeView>()?.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos:
                     return CheckMenuInfos(itemInfos, treeViewItem.DataContext);
-                }
-            }
-            else if (value is DataGridRow dataGridRow)
-            {
-                var dataGrid = dataGridRow.FindAncestor<DataGrid>();
-                if (dataGrid.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos)
-                {
+                case DataGridRow dataGridRow when dataGridRow.FindAncestor<DataGrid>()?.GetValue(CommandEx.ItemsSourceProperty) is IEnumerable<MenuItemInfo> itemInfos:
                     return CheckMenuInfos(itemInfos, dataGridRow.DataContext);
-                }
+                default:
+                    return value;
             }
-
-            return value;
         }
 
         private List<MenuItemInfo> CheckMenuInfos(IEnumerable<MenuItemInfo> menuItemInfos, object dataContext)
@@ -39,7 +30,7 @@ namespace WpfPlayground.Wpf.Converter
             {
                 if (itemInfo.CanExecute?.Invoke(dataContext) ?? true)
                 {
-                    menus.Add(new MenuItemInfo()
+                    menus.Add(new MenuItemInfo
                     {
                         Header = itemInfo.Header,
                         Command = itemInfo.Command,
