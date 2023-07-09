@@ -5,8 +5,10 @@ namespace WpfPlayground.Wpf.Attach
 {
     public class CommandEx
     {
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.RegisterAttached("ItemsSource", typeof(IEnumerable), typeof(CommandEx), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.RegisterAttached(
+            "ItemsSource",
+            typeof(IEnumerable),
+            typeof(CommandEx));
 
         public static IEnumerable GetItemsSource(DependencyObject obj)
         {
